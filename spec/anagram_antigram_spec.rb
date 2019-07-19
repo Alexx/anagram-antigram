@@ -22,4 +22,9 @@ describe('#anagram_antigram') do
     test = Anagram_Antigram.new('hi', 'bye')
     expect(test.anagram()).to(eq("hi and bye are antigrams."))
   end
+
+  it('should test if multi-word sentences are anagrams') do
+    test = Anagram_Antigram.new('the dog', 'the god')
+    expect(test.anagram()).to(eq("the dog and the god are anagrams."))
+  end
 end

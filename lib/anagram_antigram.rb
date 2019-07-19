@@ -13,7 +13,9 @@ class Anagram_Antigram
   def anagram
     @VOWELS = ["a", "e", "i", "o", "u"]
     @word_one_array = @word_one.downcase().split('').sort()
+    @word_one_array = @word_one_array.reject {|element| element.empty?}
     @word_two_array = @word_two.downcase().split('').sort()
+    @word_two_array = @word_two_array.reject {|element| element.empty?}
 
     if @word_one_array.any? {|vowel| @VOWELS.include?(vowel)}
       @word_one_contain_vowel = true
