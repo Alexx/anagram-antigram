@@ -6,8 +6,7 @@ class Anagram_Antigram
   def initialize(phrase1, phrase2)
     @phrase_one = phrase1
     @phrase_two = phrase2
-    @phrase_one_contain_vowel = false
-    @phrase_two_contain_vowel = false
+    @contain_vowel = true
   end
 
   def anagram
@@ -16,24 +15,24 @@ class Anagram_Antigram
     @phrase_two_array = @phrase_two.downcase().split(' ')
 
     @phrase_one_array.each do |word|
-      if word.split('').any? {|vowel| @VOWELS.include?(vowel)}
-        @phrase_one_contain_vowel = true
+      if !word.split('').any? { |vowel| @VOWELS.include?(vowel) }
+        @contain_vowel = false
       end
     end
 
     @phrase_two_array.each do |word|
-      if word.split('').any? {|vowel| @VOWELS.include?(vowel)}
-        @phrase_two_contain_vowel = true
+      if !word.split('').any? { |vowel| @VOWELS.include?(vowel) }
+        @contain_vowel = false
       end
     end
 
-
-    if @phrase_one_contain_vowel == false || @phrase_two_contain_vowel == false
+    if @contain_vowel == false
       return "You need to input actual words!"
     end
 
-    @phrase_one_array = @phrase_one_array.join('').split('').sort().reject {|element| element.empty?}
-    @phrase_two_array = @phrase_two_array.join('').split('').sort().reject {|element| element.empty?}
+    #Join words in phrase together in alphabetical order and delete all empty spaces
+    @phrase_one_array = @phrase_one_array.join('').split('').sort().reject { |e| e.empty? }
+    @phrase_two_array = @phrase_two_array.join('').split('').sort().reject { |e| e.empty? }
 
     if @phrase_one_array == @phrase_two_array
       return "#{@phrase_one} and #{@phrase_two} are anagrams."
