@@ -12,7 +12,9 @@ _This is an application that takes in two phrases and outputs whether those phra
 
 Step 1: Clone this repository to your desktop
 
-Step 2: In terminal, within the project directory, type bundle install
+Step 2: Ensure Aspell is installed ('brew install aspell')
+
+Step 3: In terminal, within the project directory, type bundle install
 
 ## Technologies Used
 

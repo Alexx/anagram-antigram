@@ -1,5 +1,5 @@
 require('pry')
-require ('ffi/aspell')
+require('ffi/aspell')
 
 class Anagram_Antigram
   attr_reader(:PHRASE_ONE, :PHRASE_TWO)
@@ -16,6 +16,7 @@ class Anagram_Antigram
     @PHRASE_ONE_ARRAY = phrase1.downcase().split('').sort().reject { |e| e == " "}
     @PHRASE_TWO_ARRAY = phrase2.downcase().split('').sort().reject { |e| e == " "}
   end
+
 
   def is_valid_phrase?()
     speller = FFI::Aspell::Speller.new('en_US')
