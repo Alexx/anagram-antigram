@@ -6,7 +6,7 @@
 
 ## Description
 
-_This is an application that takes in a word and outputs whether that word is an anagram or antigram._
+_This is an application that takes in two phrases and outputs whether those phrases are an anagram, antigram or neither._
 
 ## Setup/Installation
 
