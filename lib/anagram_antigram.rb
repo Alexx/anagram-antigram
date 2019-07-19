@@ -8,14 +8,14 @@ class Anagram_Antigram
     @word_two = word2
   end
 
-  def anagram?
-    @word_one_array = @word_one.split('').sort()
-    @word_two_array = @word_two.split('').sort()
+  def anagram
+    @word_one_array = @word_one.downcase().split('').sort()
+    @word_two_array = @word_two.downcase().split('').sort()
 
     if @word_one_array == @word_two_array
-      return true
+      return "#{@word_one} and #{@word_two} are anagrams."
     else
-      return false
+      return "#{@word_one} and #{@word_two} are NOT anagrams."
     end
   end
 end
