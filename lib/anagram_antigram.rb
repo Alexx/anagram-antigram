@@ -1,4 +1,5 @@
 require('pry')
+require ('ffi/aspell')
 
 class Anagram_Antigram
   attr_reader(:PHRASE_ONE, :PHRASE_TWO)
@@ -17,23 +18,24 @@ class Anagram_Antigram
   end
 
   def is_valid_phrase?()
-    @VOWELS = ["a", "e", "i", "o", "u"]
-
+    speller = FFI::Aspell::Speller.new('en_US')
     @PHRASE_ONE_INTACT.each do |word|
-      if !word.split('').any? { |vowel| @VOWELS.include?(vowel) }
+      if !speller.correct?(word)
         @valid_phrase = false
       end
     end
 
     @PHRASE_TWO_INTACT.each do |word|
-      if !word.split('').any? { |vowel| @VOWELS.include?(vowel) }
+      if !speller.correct?(word)
         @valid_phrase = false
       end
     end
 
     if @valid_phrase == false
+      speller.close
       return false
     else
+      speller.close
       return true
     end
   end
@@ -61,5 +63,3 @@ class Anagram_Antigram
     end
   end
 end
-
-#testing gems, ongoing
