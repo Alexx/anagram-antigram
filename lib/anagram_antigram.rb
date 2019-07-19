@@ -1,31 +1,31 @@
 require('pry')
 
 class Anagram_Antigram
-  attr_reader(:phrase_one, :phrase_two)
+  attr_reader(:PHRASE_ONE, :PHRASE_TWO)
 
   def initialize(phrase1, phrase2)
-    @phrase_one = phrase1
-    @phrase_two = phrase2
+    @PHRASE_ONE = phrase1
+    @PHRASE_TWO = phrase2
 
     #Force phrase to lowercase and split up words into an array
-    @phrase_one_intact = phrase1.downcase().split(' ')
-    @phrase_two_intact = phrase2.downcase().split(' ')
+    @PHRASE_ONE_INTACT = phrase1.downcase().split(' ')
+    @PHRASE_TWO_INTACT = phrase2.downcase().split(' ')
 
     #Force phrase to lowercase, in alphabetical order and delete all empty spaces
-    @phrase_one_array = phrase1.downcase().split('').sort().reject { |e| e == " "}
-    @phrase_two_array = phrase2.downcase().split('').sort().reject { |e| e == " "}
+    @PHRASE_ONE_ARRAY = phrase1.downcase().split('').sort().reject { |e| e == " "}
+    @PHRASE_TWO_ARRAY = phrase2.downcase().split('').sort().reject { |e| e == " "}
   end
 
   def is_valid_phrase?()
     @VOWELS = ["a", "e", "i", "o", "u"]
 
-    @phrase_one_intact.each do |word|
+    @PHRASE_ONE_INTACT.each do |word|
       if !word.split('').any? { |vowel| @VOWELS.include?(vowel) }
         @valid_phrase = false
       end
     end
 
-    @phrase_two_intact.each do |word|
+    @PHRASE_TWO_INTACT.each do |word|
       if !word.split('').any? { |vowel| @VOWELS.include?(vowel) }
         @valid_phrase = false
       end
@@ -38,19 +38,27 @@ class Anagram_Antigram
     end
   end
 
-  # def how_many_letters_match
-  #
-  # end
+  def how_many_letters_match
+    @same_letter_array = []
+    @PHRASE_ONE_ARRAY.each do |letter|
+      if @PHRASE_TWO_ARRAY.include?(letter)
+        @same_letter_array.push(letter)
+      end
+    end
+    @same_letter_array
+  end
 
   def anagram
     if !is_valid_phrase?()
       return "You need to input actual words!"
-    elsif @phrase_one_array == @phrase_two_array
-      return "#{@phrase_one} and #{@phrase_two} are anagrams."
-    elsif !@phrase_one_array.any? {|letter| @phrase_two_array.include?(letter)}
-      return "#{@phrase_one} and #{@phrase_two} are antigrams."
+    elsif @PHRASE_ONE_ARRAY == @PHRASE_TWO_ARRAY
+      return "#{@PHRASE_ONE} and #{@PHRASE_TWO} are anagrams."
+    elsif !@PHRASE_ONE_ARRAY.any? { |letter| @PHRASE_TWO_ARRAY.include?(letter) }
+      return "#{@PHRASE_ONE} and #{@PHRASE_TWO} are antigrams."
     else
-      return "#{@phrase_one} and #{@phrase_two} are NOT anagrams."
+      @letters = how_many_letters_match()
+      return "#{@PHRASE_ONE} and #{@PHRASE_TWO} aren't anagrams but #{@letters.length} letters match: #{@letters.join(', ')}."
+
     end
   end
 end

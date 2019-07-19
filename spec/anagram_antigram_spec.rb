@@ -27,8 +27,8 @@ describe('#anagram_antigram') do
     expect(test.anagram()).to(eq("bury dog and ruby god are anagrams."))
   end
 
-  # it('should return number of letters that match if word is NOT an anagram') do
-  #   test = Anagram_Antigram.new('cat', 'batty')
-  #   expect(test.anagram()).to(eq("These words aren't anagrams but 2 letters match: a, t."))
-  # end
+  it('should return number of letters that match if word is NOT an anagram') do
+    test = Anagram_Antigram.new('cat', 'batty')
+    expect(test.anagram()).to(eq("cat and batty aren't anagrams but 2 letters match: a, t."))
+  end
 end
