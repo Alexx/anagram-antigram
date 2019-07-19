@@ -1,40 +1,46 @@
 require('pry')
 
 class Anagram_Antigram
-  attr_reader(:word_one, :word_two)
+  attr_reader(:phrase_one, :phrase_two)
 
-  def initialize(word1, word2)
-    @word_one = word1
-    @word_two = word2
-    @word_one_contain_vowel = false
-    @word_two_contain_vowel = false
+  def initialize(phrase1, phrase2)
+    @phrase_one = phrase1
+    @phrase_two = phrase2
+    @phrase_one_contain_vowel = false
+    @phrase_two_contain_vowel = false
   end
 
   def anagram
     @VOWELS = ["a", "e", "i", "o", "u"]
-    @word_one_array = @word_one.downcase().split('').sort()
-    @word_one_array = @word_one_array.reject {|element| element.empty?}
-    @word_two_array = @word_two.downcase().split('').sort()
-    @word_two_array = @word_two_array.reject {|element| element.empty?}
+    @phrase_one_array = @phrase_one.downcase().split(' ')
+    @phrase_two_array = @phrase_two.downcase().split(' ')
 
-    if @word_one_array.any? {|vowel| @VOWELS.include?(vowel)}
-      @word_one_contain_vowel = true
+    @phrase_one_array.each do |word|
+      if word.split('').any? {|vowel| @VOWELS.include?(vowel)}
+        @phrase_one_contain_vowel = true
+      end
     end
 
-    if @word_two_array.any? {|vowel| @VOWELS.include?(vowel)}
-      @word_two_contain_vowel = true
+    @phrase_two_array.each do |word|
+      if word.split('').any? {|vowel| @VOWELS.include?(vowel)}
+        @phrase_two_contain_vowel = true
+      end
     end
 
-    if @word_one_contain_vowel == false || @word_two_contain_vowel == false
+
+    if @phrase_one_contain_vowel == false || @phrase_two_contain_vowel == false
       return "You need to input actual words!"
     end
 
-    if @word_one_array == @word_two_array
-      return "#{@word_one} and #{@word_two} are anagrams."
-    elsif !@word_one_array.any? {|letter| @word_two_array.include?(letter)}
-      return "#{@word_one} and #{@word_two} are antigrams."
+    @phrase_one_array = @phrase_one_array.join('').split('').sort().reject {|element| element.empty?}
+    @phrase_two_array = @phrase_two_array.join('').split('').sort().reject {|element| element.empty?}
+
+    if @phrase_one_array == @phrase_two_array
+      return "#{@phrase_one} and #{@phrase_two} are anagrams."
+    elsif !@phrase_one_array.any? {|letter| @phrase_two_array.include?(letter)}
+      return "#{@phrase_one} and #{@phrase_two} are antigrams."
     else
-      return "#{@word_one} and #{@word_two} are NOT anagrams."
+      return "#{@phrase_one} and #{@phrase_two} are NOT anagrams."
     end
 
   end
