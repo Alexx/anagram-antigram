@@ -15,14 +15,12 @@ class Anagram_Antigram
     @word_one_array = @word_one.downcase().split('').sort()
     @word_two_array = @word_two.downcase().split('').sort()
 
-    @VOWELS.each do |vowel|
-      if @word_one_array.include?(vowel)
-        @word_one_contain_vowel = true
-      end
+    if @word_one_array.any? {|vowel| @VOWELS.include?(vowel)}
+      @word_one_contain_vowel = true
+    end
 
-      if @word_two_array.include?(vowel)
-        @word_two_contain_vowel = true
-      end
+    if @word_two_array.any? {|vowel| @VOWELS.include?(vowel)}
+      @word_two_contain_vowel = true
     end
 
     if @word_one_contain_vowel == false || @word_two_contain_vowel == false
@@ -31,8 +29,11 @@ class Anagram_Antigram
 
     if @word_one_array == @word_two_array
       return "#{@word_one} and #{@word_two} are anagrams."
+    elsif !@word_one_array.any? {|letter| @word_two_array.include?(letter)}
+      return "#{@word_one} and #{@word_two} are antigrams."
     else
       return "#{@word_one} and #{@word_two} are NOT anagrams."
     end
+
   end
 end
