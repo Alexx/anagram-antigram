@@ -14,7 +14,18 @@ Step 1: Clone this repository to your desktop
 
 Step 2: Ensure Aspell is installed ('brew install aspell')
 
-Step 3: In terminal, within the project directory, type bundle install
+Step 3: In terminal, within the project directory, type 'bundle install'
+
+## Specs
+
+| Behavior | Input | Output |
+| ------------- |:-------------:| -----:|
+| return if words are anagrams | 'ruby', 'bury' | ruby and bury are anagrams. |
+| return if words are anagrams regardless of case | 'Ruby', 'Bury' | Ruby and Bury are anagrams. |
+| return if words contain a vowel | 'ruby', 'btr' | You need to input actual words! |
+| return if words are antigrams | 'hi', 'bye' | hi and bye are antigrams. |
+| return if multi-word sentences are anagrams | 'bury dog', 'ruby god' | bury dog and ruby god are anagrams. |
+| return number of letters that match if word is NOT an anagram | 'cat', 'batty' | cat and batty aren't anagrams but 2 letters match: a, t. | 
 
 ## Technologies Used
 

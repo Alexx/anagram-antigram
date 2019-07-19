@@ -1,4 +1,3 @@
-require('pry')
 require('ffi/aspell')
 
 class Anagram_Antigram
@@ -17,26 +16,25 @@ class Anagram_Antigram
     @PHRASE_TWO_ARRAY = phrase2.downcase().split('').sort().reject { |e| e == " "}
   end
 
-
-  def is_valid_phrase?()
-    speller = FFI::Aspell::Speller.new('en_US')
+  def is_valid_phrase?
+    @speller = FFI::Aspell::Speller.new('en_US')
     @PHRASE_ONE_INTACT.each do |word|
-      if !speller.correct?(word)
+      if !@speller.correct?(word)
         @valid_phrase = false
       end
     end
 
     @PHRASE_TWO_INTACT.each do |word|
-      if !speller.correct?(word)
+      if !@speller.correct?(word)
         @valid_phrase = false
       end
     end
 
     if @valid_phrase == false
-      speller.close
+      @speller.close
       return false
     else
-      speller.close
+      @speller.close
       return true
     end
   end
